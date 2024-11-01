@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:softwars_to_do/navigation/navigation.dart';
 import 'package:softwars_to_do/theme/app_theme.dart';
-
-import 'login/ui/login_screen.dart';
 
 void main() {
   runApp(const SoftWarsTodoApp());
@@ -14,7 +13,8 @@ class SoftWarsTodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: const LoginScreen(),
+      initialRoute: Routes.login,
+      getPages: AppPages.pages,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
     );
