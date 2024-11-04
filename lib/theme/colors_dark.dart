@@ -12,6 +12,7 @@ class AppColorsDark {
       onSurface: Color(0xFFFAFAFA),
       error: Color(0xFFD94141),
       onError: Color(0xFFFAFAFA),
+      tertiary: Color(0xFFFBEFB4),
     );
   }
 }
