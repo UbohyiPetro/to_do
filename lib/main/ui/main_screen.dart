@@ -9,6 +9,15 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const selectedIndex = 0;
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(Spacing.medium),
+        child: FloatingActionButton(
+          child: const Icon(
+            Icons.add,
+          ),
+          onPressed: () {},
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
