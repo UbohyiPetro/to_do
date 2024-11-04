@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:softwars_to_do/main/ui/todo_item.dart';
 
 import '../../theme/spacing.dart';
 
@@ -54,20 +55,10 @@ class MainScreen extends StatelessWidget {
               const SizedBox(height: Spacing.semiLarge),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 3,
+                  padding: const EdgeInsets.only(bottom: Spacing.large),
+                  itemCount: 17,
                   itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      color: Colors.yellow.shade100,
-                      child: Padding(
-                        padding: const EdgeInsets.all(Spacing.small),
-                        child: Text(
-                          'Todo $index',
-                          style: const TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    );
+                    return const TodoItem();
                   },
                 ),
               )
