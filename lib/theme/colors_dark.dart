@@ -13,6 +13,7 @@ class AppColorsDark {
       error: Color(0xFFD94141),
       onError: Color(0xFFFAFAFA),
       tertiary: Color(0xFFFBEFB4),
+      tertiaryContainer: Color(0xFFF2C8C8),
     );
   }
 }
