@@ -41,6 +41,26 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: Spacing.semiLarge),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      color: Colors.yellow.shade100,
+                      child: Padding(
+                        padding: const EdgeInsets.all(Spacing.small),
+                        child: Text(
+                          'Todo $index',
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               )
             ],
           ),
@@ -56,6 +76,7 @@ class ToggleButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const ToggleButton({
+    super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,
@@ -63,25 +84,30 @@ class ToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: Spacing.tiny),
       child: InkWell(
+        borderRadius: BorderRadius.circular(Spacing.semiLarge),
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
-            color: isSelected ? Colors.yellow.shade100 : Colors.transparent,
-            borderRadius: BorderRadius.circular(20),
+            color: isSelected ? colorScheme.tertiary : Colors.transparent,
+            borderRadius: BorderRadius.circular(Spacing.semiLarge),
             border: Border.all(
-              color: isSelected ? Colors.transparent : Colors.yellow.shade100,
+              color: isSelected ? Colors.transparent : colorScheme.tertiary,
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(
+            horizontal: Spacing.medium,
+            vertical: Spacing.small,
+          ),
           child: Center(
             child: Text(
               label,
               style: TextStyle(
                 fontSize: 18,
-                color: isSelected ? Colors.black : Colors.yellow.shade100,
+                color: isSelected ? colorScheme.surface : colorScheme.tertiary,
                 fontWeight: FontWeight.w500,
               ),
             ),
