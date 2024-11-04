@@ -12,6 +12,7 @@ class AppColorsLight {
       onSurface: Color(0xFF1F1F1F),
       error: Color(0xFFD94141),
       onError: Color(0xFFFAFAFA),
+      tertiary: Color(0xFFFBEFB4),
     );
   }
 }
