@@ -200,13 +200,15 @@ class AddToDoScreen extends StatelessWidget {
                         TodoItem todoItem = TodoItem(
                           id: '1',
                           status: 1,
-                          name: addTodoState.nameController.text,
+                          name: addTodoState.nameController.text.trim(),
                           type: addTodoState.isTypePrivate.value == 1 ? 2 : 1,
-                          description: addTodoState.descriptionController.text,
+                          description:
+                              addTodoState.descriptionController.text.trim(),
                           finishDate: 0,
                           urgent: addTodoState.urgent.value,
                         );
                         mainController.addTodo(todoItem);
+                        Get.back();
                       },
                       child: const Text(
                         'Створити',

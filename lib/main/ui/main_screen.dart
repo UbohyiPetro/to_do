@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:softwars_to_do/main/controller/main_controller.dart';
-import 'package:softwars_to_do/main/ui/todo_item.dart';
+import 'package:softwars_to_do/main/ui/todo_item_сard.dart';
 
 import '../../navigation/navigation.dart';
 import '../../theme/spacing.dart';

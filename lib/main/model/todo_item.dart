@@ -1,6 +1,6 @@
 class TodoItem {
   final String id;
-  final int status;
+  int status;
   final String name;
   final int type;
   final String description;
