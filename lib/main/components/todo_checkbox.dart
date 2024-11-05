@@ -4,12 +4,14 @@ import '../../theme/spacing.dart';
 
 class TodoCheckbox extends StatelessWidget {
   final bool isChecked;
+  final Color? borderColor;
   final VoidCallback onChanged;
 
   const TodoCheckbox({
     super.key,
     required this.isChecked,
     required this.onChanged,
+    this.borderColor,
   });
 
   @override
@@ -24,6 +26,7 @@ class TodoCheckbox extends StatelessWidget {
           color: isChecked ? colorScheme.tertiary : null,
           border: Border.all(
             width: 1,
+            color: borderColor ?? Colors.black,
           ),
           borderRadius: BorderRadius.circular(
             Spacing.tiny,

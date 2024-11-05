@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:softwars_to_do/main/ui/todo_item.dart';
 
+import '../../navigation/navigation.dart';
 import '../../theme/spacing.dart';
 
 class MainScreen extends StatelessWidget {
@@ -16,7 +18,9 @@ class MainScreen extends StatelessWidget {
           child: const Icon(
             Icons.add,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(Routes.addTodo);
+          },
         ),
       ),
       body: SafeArea(
