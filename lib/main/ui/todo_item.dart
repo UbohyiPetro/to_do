@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../theme/spacing.dart';
 import '../components/todo_checkbox.dart';
+import '../model/todo_item.dart';
 
-class TodoItem extends StatelessWidget {
-  const TodoItem({super.key});
+class TodoItemCard extends StatelessWidget {
+  final TodoItem todoItem;
+
+  const TodoItemCard({super.key, required this.todoItem});
 
   @override
   Widget build(BuildContext context) {
