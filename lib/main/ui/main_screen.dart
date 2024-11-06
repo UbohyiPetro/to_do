@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:softwars_to_do/main/ui/todo_item.dart';
+import 'package:softwars_to_do/main/controller/main_controller.dart';
+import 'package:softwars_to_do/main/ui/todo_item_сard.dart';
 
 import '../../navigation/navigation.dart';
 import '../../theme/spacing.dart';
+import '../model/todo_item.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const selectedIndex = 0;
+    final mainController = Get.put(MainController());
+    final mainState = mainController.mainState;
     return Scaffold(
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(Spacing.medium),
@@ -29,44 +32,65 @@ class MainScreen extends StatelessWidget {
             vertical: Spacing.semiLarge,
             horizontal: Spacing.medium,
           ),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: ToggleButton(
-                      label: 'Усі',
-                      isSelected: selectedIndex == 0,
-                      onTap: () {},
+          child: Obx(
+            () => Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: ToggleButton(
+                        label: 'Усі',
+                        isSelected: mainController.isFilterSelected(0),
+                        onTap: () {
+                          mainState.filterValue.value = 0;
+                          mainController
+                              .applyFilter(mainState.filterValue.value);
+                        },
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: ToggleButton(
-                      label: 'Робочі',
-                      isSelected: selectedIndex == 1,
-                      onTap: () {},
+                    Expanded(
+                      child: ToggleButton(
+                        label: 'Робочі',
+                        isSelected: mainController.isFilterSelected(1),
+                        onTap: () {
+                          mainState.filterValue.value = 1;
+                          mainController
+                              .applyFilter(mainState.filterValue.value);
+                        },
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: ToggleButton(
-                      label: 'Особисті',
-                      isSelected: selectedIndex == 2,
-                      onTap: () {},
+                    Expanded(
+                      child: ToggleButton(
+                        label: 'Особисті',
+                        isSelected: mainController.isFilterSelected(2),
+                        onTap: () {
+                          mainState.filterValue.value = 2;
+                          mainController
+                              .applyFilter(mainState.filterValue.value);
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: Spacing.semiLarge),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(bottom: Spacing.large),
-                  itemCount: 17,
-                  itemBuilder: (BuildContext context, int index) {
-                    return const TodoItem();
-                  },
+                  ],
                 ),
-              )
-            ],
+                const SizedBox(height: Spacing.semiLarge),
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.only(bottom: Spacing.large),
+                    itemCount: mainController.isFilterApplied()
+                        ? mainState.filteredTodos.length
+                        : mainState.todos.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      TodoItem todoItem = mainController.isFilterApplied()
+                          ? mainState.filteredTodos[index]
+                          : mainState.todos[index];
+                      return TodoItemCard(
+                        todoItem: todoItem,
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

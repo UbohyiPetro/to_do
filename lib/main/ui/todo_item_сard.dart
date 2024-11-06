@@ -1,43 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:softwars_to_do/main/controller/main_controller.dart';
 
 import '../../theme/spacing.dart';
 import '../components/todo_checkbox.dart';
+import '../model/todo_item.dart';
 
-class TodoItem extends StatelessWidget {
-  const TodoItem({super.key});
+class TodoItemCard extends StatelessWidget {
+  final TodoItem todoItem;
+
+  const TodoItemCard({super.key, required this.todoItem});
 
   @override
   Widget build(BuildContext context) {
+    final MainController mainController = Get.find<MainController>();
     final colorScheme = Theme.of(context).colorScheme;
     return Card(
       elevation: 0,
-      color: false ? colorScheme.onSecondary : colorScheme.tertiaryContainer,
+      color: todoItem.urgent == 0
+          ? colorScheme.onSecondary
+          : colorScheme.tertiaryContainer,
       child: Padding(
         padding: const EdgeInsets.all(Spacing.small),
         child: Row(
           children: [
-            const Icon(
+            Icon(
               size: 32,
-              false ? Icons.work_outline : Icons.home_outlined,
+              todoItem.type == 1 ? Icons.work_outline : Icons.home_outlined,
               color: Colors.black,
             ),
             const SizedBox(
               width: Spacing.small,
             ),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Створити головну сторінку тестового завдання",
-                    style: TextStyle(
+                    todoItem.name,
+                    style: const TextStyle(
                       height: 1.2,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
                   ),
-                  Text(
+                  const Text(
                     "01.11.2024",
                     style: TextStyle(fontSize: 10, color: Colors.black),
                   ),
@@ -46,8 +54,10 @@ class TodoItem extends StatelessWidget {
             ),
             const SizedBox(width: Spacing.small),
             TodoCheckbox(
-              isChecked: true,
-              onChanged: () {},
+              isChecked: todoItem.status == 1 ? false : true,
+              onChanged: () {
+                mainController.updateTodoStatus(todoItem);
+              },
             )
           ],
         ),
