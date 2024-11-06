@@ -14,7 +14,6 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainController = Get.put(MainController());
     final mainState = mainController.mainState;
-    const selectedIndex = 0;
     return Scaffold(
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(Spacing.medium),
@@ -41,22 +40,34 @@ class MainScreen extends StatelessWidget {
                     Expanded(
                       child: ToggleButton(
                         label: 'Усі',
-                        isSelected: selectedIndex == 0,
-                        onTap: () {},
+                        isSelected: mainController.isFilterSelected(0),
+                        onTap: () {
+                          mainState.filterValue.value = 0;
+                          mainController
+                              .applyFilter(mainState.filterValue.value);
+                        },
                       ),
                     ),
                     Expanded(
                       child: ToggleButton(
                         label: 'Робочі',
-                        isSelected: selectedIndex == 1,
-                        onTap: () {},
+                        isSelected: mainController.isFilterSelected(1),
+                        onTap: () {
+                          mainState.filterValue.value = 1;
+                          mainController
+                              .applyFilter(mainState.filterValue.value);
+                        },
                       ),
                     ),
                     Expanded(
                       child: ToggleButton(
                         label: 'Особисті',
-                        isSelected: selectedIndex == 2,
-                        onTap: () {},
+                        isSelected: mainController.isFilterSelected(2),
+                        onTap: () {
+                          mainState.filterValue.value = 2;
+                          mainController
+                              .applyFilter(mainState.filterValue.value);
+                        },
                       ),
                     ),
                   ],
@@ -65,9 +76,13 @@ class MainScreen extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.only(bottom: Spacing.large),
-                    itemCount: mainState.todos.length,
+                    itemCount: mainController.isFilterApplied()
+                        ? mainState.filteredTodos.length
+                        : mainState.todos.length,
                     itemBuilder: (BuildContext context, int index) {
-                      TodoItem todoItem = mainState.todos[index];
+                      TodoItem todoItem = mainController.isFilterApplied()
+                          ? mainState.filteredTodos[index]
+                          : mainState.todos[index];
                       return TodoItemCard(
                         todoItem: todoItem,
                       );
