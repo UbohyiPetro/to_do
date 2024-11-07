@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:softwars_to_do/main/controller/main_controller.dart';
 
 import '../../theme/spacing.dart';
 import '../components/todo_checkbox.dart';
@@ -13,7 +11,6 @@ class TodoItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MainController mainController = Get.find<MainController>();
     final colorScheme = Theme.of(context).colorScheme;
     return Card(
       elevation: 0,
@@ -55,9 +52,7 @@ class TodoItemCard extends StatelessWidget {
             const SizedBox(width: Spacing.small),
             TodoCheckbox(
               isChecked: todoItem.status == 1 ? false : true,
-              onChanged: () {
-                mainController.updateTodoStatus(todoItem);
-              },
+              onChanged: () {},
             )
           ],
         ),
