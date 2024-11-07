@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -24,7 +25,8 @@ class AddTodoState {
       description: descriptionController.text.trim(),
       finishDate: DateFormat('dd.MM.yyyy').parse(finishDate.value),
       urgent: urgent.value,
-      file: '',
+      file:
+          file.value != null ? base64Encode(file.value!.readAsBytesSync()) : '',
     );
   }
 }
