@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:softwars_to_do/main/model/todo_item.dart';
+import 'package:softwars_to_do/main/model/task_item.dart';
 
 class AddTodoState {
   RxInt urgent = RxInt(0);
@@ -16,8 +16,8 @@ class AddTodoState {
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  TodoItem getTodoItem() {
-    return TodoItem(
+  TaskItem getTodoItem() {
+    return TaskItem(
       taskId: DateTime.now().millisecondsSinceEpoch.toString(),
       status: 1,
       name: nameController.text.trim(),

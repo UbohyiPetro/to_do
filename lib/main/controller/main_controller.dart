@@ -1,30 +1,28 @@
 import 'package:get/get.dart';
-import 'package:softwars_to_do/database/repository/todo_repository.dart';
-import 'package:softwars_to_do/main/mapper/todo_mapper.dart';
-import 'package:softwars_to_do/main/model/todo_item.dart';
+import 'package:softwars_to_do/main/model/task_item.dart';
+import 'package:softwars_to_do/main/repository/tasks_repository.dart';
 import 'package:softwars_to_do/main/state/main_state.dart';
 
 class MainController extends GetxController {
-  final TodoRepository _todoRepository = Get.find();
+  final TaskRepository _taskRepository = Get.find();
   final MainState mainState = MainState();
 
   @override
   void onInit() {
+    _taskRepository.fetchTasks();
     _observeTodos();
     super.onInit();
   }
 
   void _observeTodos() {
-    _todoRepository.observeTodos().listen((todoEntityList) {
-      mainState.todos.value =
-          todoEntityList.map((todoEntity) => todoEntity.toTodoItem()).toList();
+    _taskRepository.observeTasks().listen((tasks) {
+      mainState.todos.value = tasks;
     });
   }
 
-  void updateTodoStatus(TodoItem todoItem) {
-    var status = todoItem.status == 1 ? 2 : 1;
-    _todoRepository
-        .updateTodo(todoItem.copyWith(status: status).toTodoEntity());
+  void updateStatus(TaskItem task) {
+    var status = task.status == 1 ? 2 : 1;
+    _taskRepository.updateStatus(task.copyWith(status: status));
   }
 
   bool isFilterSelected(int filterValue) =>

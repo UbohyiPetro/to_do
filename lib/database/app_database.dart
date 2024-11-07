@@ -3,11 +3,11 @@ import 'package:floor/floor.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 import 'package:softwars_to_do/database/dao/todo_dao.dart';
 
-import 'entity/todo_entity.dart';
+import 'entity/task_entity.dart';
 
 part 'app_database.g.dart';
 
-@Database(version: 1, entities: [TodoEntity])
+@Database(version: 1, entities: [TaskEntity])
 abstract class AppDatabase extends FloorDatabase {
   TodoDao get todoDao;
 

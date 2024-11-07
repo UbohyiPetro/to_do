@@ -5,7 +5,7 @@ import 'package:softwars_to_do/main/ui/todo_item_сard.dart';
 
 import '../../navigation/navigation.dart';
 import '../../theme/spacing.dart';
-import '../model/todo_item.dart';
+import '../model/task_item.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -80,12 +80,12 @@ class MainScreen extends StatelessWidget {
                         ? mainState.filteredTodos.length
                         : mainState.todos.length,
                     itemBuilder: (BuildContext context, int index) {
-                      TodoItem todoItem = mainController.isFilterApplied()
+                      TaskItem todoItem = mainController.isFilterApplied()
                           ? mainState.filteredTodos[index]
                           : mainState.todos[index];
                       return TodoItemCard(
                         todoItem: todoItem,
-                        onClick: mainController.updateTodoStatus,
+                        onClick: mainController.updateStatus,
                       );
                     },
                   ),

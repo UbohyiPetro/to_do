@@ -1,7 +1,7 @@
 import 'package:floor/floor.dart';
 
 @Entity(tableName: 'todos')
-class TodoEntity {
+class TaskEntity {
   @PrimaryKey()
   final String taskId;
   final int status;
@@ -9,10 +9,10 @@ class TodoEntity {
   final int type;
   final String description;
   final String file;
-  final String finishDate;
+  final int finishDate;
   final int urgent;
 
-  TodoEntity({
+  TaskEntity({
     required this.taskId,
     required this.status,
     required this.name,

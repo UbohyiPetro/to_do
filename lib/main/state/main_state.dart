@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:softwars_to_do/main/model/todo_item.dart';
+import 'package:softwars_to_do/main/model/task_item.dart';
 
 class MainState {
-  RxList<TodoItem> todos = RxList();
-  RxList<TodoItem> filteredTodos = RxList();
+  RxList<TaskItem> todos = RxList();
+  RxList<TaskItem> filteredTodos = RxList();
   RxInt filterValue = RxInt(0);
 }

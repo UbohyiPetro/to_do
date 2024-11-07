@@ -1,4 +1,4 @@
-class TodoItem {
+class TaskItem {
   final String taskId;
   int status;
   final String name;
@@ -8,7 +8,7 @@ class TodoItem {
   final DateTime finishDate;
   final int urgent;
 
-  TodoItem({
+  TaskItem({
     required this.taskId,
     required this.status,
     required this.name,
@@ -24,7 +24,7 @@ class TodoItem {
     return '$taskId\n$status\n$name\n$description\n$type\n$file\n$finishDate\n$urgent';
   }
 
-  TodoItem copyWith(
+  TaskItem copyWith(
       {String? taskId,
       int? status,
       String? name,
@@ -33,7 +33,7 @@ class TodoItem {
       String? file,
       DateTime? finishDate,
       int? urgent}) {
-    return TodoItem(
+    return TaskItem(
       taskId: taskId ?? this.taskId,
       status: status ?? this.status,
       name: name ?? this.name,
