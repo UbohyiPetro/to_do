@@ -135,10 +135,13 @@ class AddToDoScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: colorScheme.secondary,
                     ),
-                    child: const Row(
-                      children: [
-                        Text('Прикріпити файл'),
-                      ],
+                    child: InkWell(
+                      onTap: addTodoController.selectImage,
+                      child: const Row(
+                        children: [
+                          Text('Прикріпити файл'),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: Spacing.small),
