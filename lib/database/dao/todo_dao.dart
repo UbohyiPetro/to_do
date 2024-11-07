@@ -10,9 +10,9 @@ abstract class TodoDao {
   Future<TodoEntity?> findTodoById(String id);
 
   @Insert(onConflict: OnConflictStrategy.replace)
-  Future<int> insertClient(TodoEntity todoEntity);
+  Future<int> insertTodo(TodoEntity todoEntity);
 
   @Update(onConflict: OnConflictStrategy.replace)
-  Future<void> updateClient(TodoEntity todoEntity);
+  Future<void> updateTodo(TodoEntity todoEntity);
 
 }
