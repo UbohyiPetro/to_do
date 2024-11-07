@@ -26,7 +26,7 @@ class MainController extends GetxController {
   void updateTodoStatus(TodoItem todoItem) {
     var status = todoItem.status == 1 ? 2 : 1;
     _todoRepository
-        .updateTodo(todoItem.copyWith(status: status).toTodoEntity());
+        .updateTodo(todoItem.copyWith(status: status).toTaskEntity());
   }
 
   bool isFilterSelected(int filterValue) =>

@@ -25,4 +25,16 @@ class TodoApi {
       rethrow;
     }
   }
+
+  void addTask(TaskApi task) async {
+    try {
+      final response = await _dio.post(baseUrl,
+          options: Options(
+            contentType: 'application/json',
+          ),
+          data: [task]);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

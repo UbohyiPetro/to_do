@@ -233,7 +233,7 @@ class AddToDoScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        addTodoController.addTodo();
+                        addTodoController.addTask();
                         Get.back();
                       },
                       child: const Text(

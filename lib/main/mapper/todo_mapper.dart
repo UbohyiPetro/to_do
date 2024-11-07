@@ -1,8 +1,7 @@
-import 'package:intl/intl.dart';
-import 'package:softwars_to_do/database/entity/todo_entity.dart';
+import 'package:softwars_to_do/database/entity/task_entity.dart';
 import 'package:softwars_to_do/main/model/todo_item.dart';
 
-extension ToTodoItem on TodoEntity {
+extension ToTodoItem on TaskEntity {
   TodoItem toTodoItem() {
     return TodoItem(
       taskId: taskId,
@@ -11,22 +10,22 @@ extension ToTodoItem on TodoEntity {
       type: type,
       description: description,
       file: file,
-      finishDate: DateFormat('yyyy-MM-dd').parse(finishDate),
+      finishDate: DateTime.fromMillisecondsSinceEpoch(finishDate),
       urgent: urgent,
     );
   }
 }
 
-extension ToTodoEntity on TodoItem {
-  TodoEntity toTodoEntity() {
-    return TodoEntity(
+extension ToTaskEntity on TodoItem {
+  TaskEntity toTaskEntity() {
+    return TaskEntity(
       taskId: taskId,
       status: status,
       name: name,
       type: type,
       description: description,
       file: file,
-      finishDate: DateFormat('dd.MM.yyyy').format(finishDate),
+      finishDate: finishDate.millisecondsSinceEpoch,
       urgent: urgent,
     );
   }

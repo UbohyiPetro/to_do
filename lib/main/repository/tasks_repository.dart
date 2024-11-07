@@ -21,4 +21,9 @@ class TaskRepository {
       _todoStorage.insertTodo(task.toTaskEntity());
     }
   }
+
+  void addTask(TodoItem taskItem) {
+    _todoApi.addTask(taskItem.toTaskApi());
+    _todoStorage.insertTodo(taskItem.toTaskEntity());
+  }
 }

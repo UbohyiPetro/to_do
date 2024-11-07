@@ -38,7 +38,7 @@ class EditTodoController extends GetxController {
 
   Future<void> editTodo() async {
     await _todoRepository
-        .updateTodo(editTodoState.toTodoItem(taskId).toTodoEntity());
+        .updateTodo(editTodoState.toTodoItem(taskId).toTaskEntity());
   }
 
   Future<void> deleteTodo() async {

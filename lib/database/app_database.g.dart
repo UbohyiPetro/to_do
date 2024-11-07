@@ -96,7 +96,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `todos` (`taskId` TEXT NOT NULL, `status` INTEGER NOT NULL, `name` TEXT NOT NULL, `type` INTEGER NOT NULL, `description` TEXT NOT NULL, `file` TEXT NOT NULL, `finishDate` TEXT NOT NULL, `urgent` INTEGER NOT NULL, PRIMARY KEY (`taskId`))');
+            'CREATE TABLE IF NOT EXISTS `todos` (`taskId` TEXT NOT NULL, `status` INTEGER NOT NULL, `name` TEXT NOT NULL, `type` INTEGER NOT NULL, `description` TEXT NOT NULL, `file` TEXT NOT NULL, `finishDate` INTEGER NOT NULL, `urgent` INTEGER NOT NULL, PRIMARY KEY (`taskId`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -115,10 +115,10 @@ class _$TodoDao extends TodoDao {
     this.database,
     this.changeListener,
   )   : _queryAdapter = QueryAdapter(database, changeListener),
-        _todoEntityInsertionAdapter = InsertionAdapter(
+        _taskEntityInsertionAdapter = InsertionAdapter(
             database,
             'todos',
-            (TodoEntity item) => <String, Object?>{
+            (TaskEntity item) => <String, Object?>{
                   'taskId': item.taskId,
                   'status': item.status,
                   'name': item.name,
@@ -129,11 +129,11 @@ class _$TodoDao extends TodoDao {
                   'urgent': item.urgent
                 },
             changeListener),
-        _todoEntityUpdateAdapter = UpdateAdapter(
+        _taskEntityUpdateAdapter = UpdateAdapter(
             database,
             'todos',
             ['taskId'],
-            (TodoEntity item) => <String, Object?>{
+            (TaskEntity item) => <String, Object?>{
                   'taskId': item.taskId,
                   'status': item.status,
                   'name': item.name,
@@ -151,37 +151,37 @@ class _$TodoDao extends TodoDao {
 
   final QueryAdapter _queryAdapter;
 
-  final InsertionAdapter<TodoEntity> _todoEntityInsertionAdapter;
+  final InsertionAdapter<TaskEntity> _taskEntityInsertionAdapter;
 
-  final UpdateAdapter<TodoEntity> _todoEntityUpdateAdapter;
+  final UpdateAdapter<TaskEntity> _taskEntityUpdateAdapter;
 
   @override
-  Stream<List<TodoEntity>> observeTodos() {
+  Stream<List<TaskEntity>> observeTodos() {
     return _queryAdapter.queryListStream('SELECT * from todos',
-        mapper: (Map<String, Object?> row) => TodoEntity(
+        mapper: (Map<String, Object?> row) => TaskEntity(
             taskId: row['taskId'] as String,
             status: row['status'] as int,
             name: row['name'] as String,
             type: row['type'] as int,
             description: row['description'] as String,
             file: row['file'] as String,
-            finishDate: row['finishDate'] as String,
+            finishDate: row['finishDate'] as int,
             urgent: row['urgent'] as int),
         queryableName: 'todos',
         isView: false);
   }
 
   @override
-  Future<TodoEntity?> findTodoById(String id) async {
+  Future<TaskEntity?> findTodoById(String id) async {
     return _queryAdapter.query('SELECT * from todos WHERE taskId= ?1',
-        mapper: (Map<String, Object?> row) => TodoEntity(
+        mapper: (Map<String, Object?> row) => TaskEntity(
             taskId: row['taskId'] as String,
             status: row['status'] as int,
             name: row['name'] as String,
             type: row['type'] as int,
             description: row['description'] as String,
             file: row['file'] as String,
-            finishDate: row['finishDate'] as String,
+            finishDate: row['finishDate'] as int,
             urgent: row['urgent'] as int),
         arguments: [id]);
   }
@@ -193,14 +193,14 @@ class _$TodoDao extends TodoDao {
   }
 
   @override
-  Future<int> insertTodo(TodoEntity todoEntity) {
-    return _todoEntityInsertionAdapter.insertAndReturnId(
+  Future<int> insertTodo(TaskEntity todoEntity) {
+    return _taskEntityInsertionAdapter.insertAndReturnId(
         todoEntity, OnConflictStrategy.replace);
   }
 
   @override
-  Future<void> updateTodo(TodoEntity todoEntity) async {
-    await _todoEntityUpdateAdapter.update(
+  Future<void> updateTodo(TaskEntity todoEntity) async {
+    await _taskEntityUpdateAdapter.update(
         todoEntity, OnConflictStrategy.replace);
   }
 }
