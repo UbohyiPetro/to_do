@@ -187,6 +187,12 @@ class _$TodoDao extends TodoDao {
   }
 
   @override
+  Future<void> deleteTodoById(String id) async {
+    await _queryAdapter
+        .queryNoReturn('DELETE FROM todos WHERE taskId= ?1', arguments: [id]);
+  }
+
+  @override
   Future<int> insertTodo(TodoEntity todoEntity) {
     return _todoEntityInsertionAdapter.insertAndReturnId(
         todoEntity, OnConflictStrategy.replace);

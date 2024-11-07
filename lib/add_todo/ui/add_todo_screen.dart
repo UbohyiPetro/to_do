@@ -46,7 +46,6 @@ class AddToDoScreen extends StatelessWidget {
                               fontSize: 24,
                               fontWeight: FontWeight.w600,
                             ),
-                            // maxLines: 3,
                             decoration: const InputDecoration(
                               hintText: "Назва завдання...",
                               hintStyle: TextStyle(

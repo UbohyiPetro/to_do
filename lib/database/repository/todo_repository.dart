@@ -20,4 +20,8 @@ class TodoRepository {
   Future<void> updateTodo(TodoEntity todoEntity) {
     return _todoStorage.updateTodo(todoEntity);
   }
+
+  Future<void> deleteTodoById(String taskId) {
+    return _todoStorage.deleteTodo(taskId);
+  }
 }
