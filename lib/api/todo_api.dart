@@ -15,7 +15,6 @@ class TodoApi {
         throw Exception(
             "Failed to fetch tasks with code ${response.statusCode}");
       }
-      print(response.data);
       ResponseModel responseModel = ResponseModel.fromJson(response.data);
       if (responseModel.error != null) {
         throw Exception(
@@ -46,6 +45,14 @@ class TodoApi {
             contentType: 'application/json',
           ),
           data: {"status": status});
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void deleteTask(String id) async {
+    try {
+      final response = await _dio.delete('$baseUrl$id');
     } catch (e) {
       rethrow;
     }

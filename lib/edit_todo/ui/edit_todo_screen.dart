@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:softwars_to_do/edit_todo/controller/edit_todo_controller.dart';
-import 'package:softwars_to_do/edit_todo/state/edit_todo_state.dart';
 import 'package:softwars_to_do/main/components/todo_checkbox.dart';
 import '../../common/ui/date_picker.dart';
 import '../../theme/spacing.dart';
+import '../controller/edit_todo_controller.dart';
+import '../state/edit_todo_state.dart';
 
 class EditTodoScreen extends StatelessWidget {
   const EditTodoScreen({super.key});

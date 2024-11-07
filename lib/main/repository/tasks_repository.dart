@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:softwars_to_do/api/todo_api.dart';
-import 'package:softwars_to_do/main/mapper/todo_mapper.dart';
+import 'package:softwars_to_do/database/entity/task_entity.dart';
 import 'package:softwars_to_do/main/model/task_item.dart';
 import 'package:softwars_to_do/main/repository/mapper/task_mapper.dart';
 import 'package:softwars_to_do/storage/todo_storage.dart';
@@ -11,7 +11,7 @@ class TaskRepository {
 
   Stream<List<TaskItem>> observeTasks() {
     return _todoStorage.observeTodos().map((entities) {
-      return entities.map((entity) => entity.toTodoItem()).toList();
+      return entities.map((entity) => entity.toTaskItem()).toList();
     });
   }
 
@@ -20,6 +20,10 @@ class TaskRepository {
     for (var task in tasks) {
       _todoStorage.insertTodo(task.toTaskEntity());
     }
+  }
+
+  Future<TaskEntity?> findTodoById(String id) async {
+    return _todoStorage.findTodoById(id);
   }
 
   void addTask(TaskItem taskItem) {
@@ -35,5 +39,10 @@ class TaskRepository {
   void updateStatus(TaskItem taskItem) {
     _todoApi.updateStatus(taskItem.taskId, taskItem.status);
     _todoStorage.updateTodo(taskItem.toTaskEntity());
+  }
+
+  void deleteTask(String id) {
+    _todoApi.deleteTask(id);
+    _todoStorage.deleteTodo(id);
   }
 }

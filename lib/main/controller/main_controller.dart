@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:softwars_to_do/database/repository/todo_repository.dart';
 import 'package:softwars_to_do/main/model/task_item.dart';
 import 'package:softwars_to_do/main/repository/tasks_repository.dart';
 import 'package:softwars_to_do/main/state/main_state.dart';
