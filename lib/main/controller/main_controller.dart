@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:softwars_to_do/database/repository/todo_repository.dart';
 import 'package:softwars_to_do/main/mapper/todo_mapper.dart';
+import 'package:softwars_to_do/main/model/todo_item.dart';
 import 'package:softwars_to_do/main/state/main_state.dart';
 
 class MainController extends GetxController {
@@ -18,6 +19,12 @@ class MainController extends GetxController {
       mainState.todos.value =
           todoEntityList.map((todoEntity) => todoEntity.toTodoItem()).toList();
     });
+  }
+
+  void updateTodoStatus(TodoItem todoItem) {
+    var status = todoItem.status == 1 ? 2 : 1;
+    _todoRepository
+        .updateTodo(todoItem.copyWith(status: status).toTodoEntity());
   }
 
   bool isFilterSelected(int filterValue) =>

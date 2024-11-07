@@ -23,4 +23,25 @@ class TodoItem {
   String toString() {
     return '$taskId\n$status\n$name\n$description\n$type\n$file\n$finishDate\n$urgent';
   }
+
+  TodoItem copyWith(
+      {String? taskId,
+      int? status,
+      String? name,
+      int? type,
+      String? description,
+      String? file,
+      DateTime? finishDate,
+      int? urgent}) {
+    return TodoItem(
+      taskId: taskId ?? this.taskId,
+      status: status ?? this.status,
+      name: name ?? this.name,
+      type: type ?? this.type,
+      description: description ?? this.description,
+      file: file ?? this.file,
+      finishDate: finishDate ?? this.finishDate,
+      urgent: urgent ?? this.urgent,
+    );
+  }
 }

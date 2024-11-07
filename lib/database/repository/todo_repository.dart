@@ -17,7 +17,7 @@ class TodoRepository {
     return _todoStorage.findTodoById(id);
   }
 
-  Future<void> updateClient(TodoEntity todoEntity) {
+  Future<void> updateTodo(TodoEntity todoEntity) {
     return _todoStorage.updateTodo(todoEntity);
   }
 }

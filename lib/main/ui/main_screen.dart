@@ -85,10 +85,11 @@ class MainScreen extends StatelessWidget {
                           : mainState.todos[index];
                       return TodoItemCard(
                         todoItem: todoItem,
+                        onClick: mainController.updateTodoStatus,
                       );
                     },
                   ),
-                )
+                ),
               ],
             ),
           ),

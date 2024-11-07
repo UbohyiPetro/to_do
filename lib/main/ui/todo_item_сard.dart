@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../theme/spacing.dart';
 import '../components/todo_checkbox.dart';
 import '../model/todo_item.dart';
 
 class TodoItemCard extends StatelessWidget {
+  final Function(TodoItem) onClick;
   final TodoItem todoItem;
 
-  const TodoItemCard({super.key, required this.todoItem});
+  const TodoItemCard({
+    super.key,
+    required this.todoItem,
+    required this.onClick,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +48,9 @@ class TodoItemCard extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  const Text(
-                    "01.11.2024",
-                    style: TextStyle(fontSize: 10, color: Colors.black),
+                  Text(
+                    DateFormat('dd-MM-yyyy').format(todoItem.finishDate),
+                    style: const TextStyle(fontSize: 10, color: Colors.black),
                   ),
                 ],
               ),
@@ -52,7 +58,9 @@ class TodoItemCard extends StatelessWidget {
             const SizedBox(width: Spacing.small),
             TodoCheckbox(
               isChecked: todoItem.status == 1 ? false : true,
-              onChanged: () {},
+              onChanged: () {
+                onClick(todoItem);
+              },
             )
           ],
         ),
