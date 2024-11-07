@@ -18,8 +18,7 @@ class TodoStorage {
     return _todoDao.findTodoById(id);
   }
 
-  Future<void> updateClient(TodoEntity todoEntity) {
+  Future<void> updateTodo(TodoEntity todoEntity) {
     return _todoDao.updateTodo(todoEntity);
   }
-
 }
