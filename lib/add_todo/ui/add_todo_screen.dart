@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:softwars_to_do/add_todo/controller/add_todo_controller.dart';
 import 'package:softwars_to_do/main/components/todo_checkbox.dart';
 
+import '../../common/ui/date_picker.dart';
 import '../../theme/spacing.dart';
 
 class AddToDoScreen extends StatelessWidget {
@@ -146,10 +147,19 @@ class AddToDoScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: colorScheme.secondary,
                     ),
-                    child: const Row(
-                      children: [
-                        Text('Дата завершення:'),
-                      ],
+                    child: InkWell(
+                      onTap: () => pickDate(
+                          context,
+                          DateTime.now(),
+                          (selectedDate) =>
+                              {addTodoController.onDateSelect(selectedDate)}),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Дата завершення: ${addTodoState.finishDate.value}',
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: Spacing.small),

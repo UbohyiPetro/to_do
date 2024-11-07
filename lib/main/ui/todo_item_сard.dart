@@ -49,7 +49,7 @@ class TodoItemCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    DateFormat('dd-MM-yyyy').format(todoItem.finishDate),
+                    DateFormat('dd.MM.yyyy').format(todoItem.finishDate),
                     style: const TextStyle(fontSize: 10, color: Colors.black),
                   ),
                 ],
