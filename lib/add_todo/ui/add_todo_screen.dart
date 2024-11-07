@@ -196,16 +196,18 @@ class AddToDoScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(Spacing.medium),
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         TodoItem todoItem = TodoItem(
-                          id: '1',
+                          taskId:
+                              DateTime.now().millisecondsSinceEpoch.toString(),
                           status: 1,
                           name: addTodoState.nameController.text.trim(),
                           type: addTodoState.isTypePrivate.value == 1 ? 2 : 1,
                           description:
                               addTodoState.descriptionController.text.trim(),
-                          finishDate: 0,
+                          finishDate: DateTime.now(),
                           urgent: addTodoState.urgent.value,
+                          file: '',
                         );
                         mainController.addTodo(todoItem);
                         Get.back();
