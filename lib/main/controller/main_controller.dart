@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:softwars_to_do/api/todo_api.dart';
 import 'package:softwars_to_do/database/repository/todo_repository.dart';
 import 'package:softwars_to_do/main/mapper/todo_mapper.dart';
 import 'package:softwars_to_do/main/model/todo_item.dart';
@@ -6,11 +7,14 @@ import 'package:softwars_to_do/main/state/main_state.dart';
 
 class MainController extends GetxController {
   final TodoRepository _todoRepository = Get.find();
+  final TodoApi _todoApi = TodoApi();
   final MainState mainState = MainState();
 
   @override
-  void onInit() {
+  void onInit() async {
     _observeTodos();
+    var todos = await _todoApi.fetchTasks();
+    print(todos.length);
     super.onInit();
   }
 
