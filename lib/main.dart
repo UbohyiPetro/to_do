@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:softwars_to_do/di/app_dependencies.dart';
 import 'package:softwars_to_do/navigation/navigation.dart';
 import 'package:softwars_to_do/theme/app_theme.dart';
 
-void main() {
+Future<void> main() async {
+  await putDependencies();
   runApp(const SoftWarsTodoApp());
 }
 
