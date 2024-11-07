@@ -9,10 +9,12 @@ abstract class TodoDao {
   @Query('SELECT * from todos WHERE taskId= :id')
   Future<TodoEntity?> findTodoById(String id);
 
+  @Query('DELETE FROM todos WHERE taskId= :id')
+  Future<void> deleteTodoById(String id);
+
   @Insert(onConflict: OnConflictStrategy.replace)
   Future<int> insertTodo(TodoEntity todoEntity);
 
   @Update(onConflict: OnConflictStrategy.replace)
   Future<void> updateTodo(TodoEntity todoEntity);
-
 }

@@ -21,4 +21,8 @@ class TodoStorage {
   Future<void> updateTodo(TodoEntity todoEntity) {
     return _todoDao.updateTodo(todoEntity);
   }
+
+  Future<void> deleteTodo(String id) {
+    return _todoDao.deleteTodoById(id);
+  }
 }
