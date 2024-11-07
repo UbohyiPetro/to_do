@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:softwars_to_do/add_todo/controller/add_todo_controller.dart';
 import 'package:softwars_to_do/main/components/todo_checkbox.dart';
-
+import '../../common/ui/date_picker.dart';
 import '../../theme/spacing.dart';
 
 class AddToDoScreen extends StatelessWidget {
@@ -129,27 +129,67 @@ class AddToDoScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: Spacing.small),
-                  Container(
-                    padding: const EdgeInsets.all(Spacing.medium),
-                    decoration: BoxDecoration(
-                      color: colorScheme.secondary,
-                    ),
-                    child: const Row(
-                      children: [
-                        Text('Прикріпити файл'),
-                      ],
+                  InkWell(
+                    splashColor: Colors.cyan,
+                    onTap: () async {
+                      addTodoController.selectImage();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(Spacing.medium),
+                      decoration: BoxDecoration(
+                        color: colorScheme.secondary,
+                      ),
+                      child: Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                addTodoState.file.value == null
+                                    ? 'Прикріпити файл'
+                                    : 'Вкладене зображення',
+                              ),
+                              addTodoState.file.value != null
+                                  ? const SizedBox(
+                                      height: 10,
+                                    )
+                                  : const SizedBox(),
+                              addTodoState.file.value != null
+                                  ? Container(
+                                      height: 200,
+                                      child: ClipRRect(
+                                        child: Image.file(
+                                          fit: BoxFit.cover,
+                                          addTodoState.file.value!,
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: Spacing.small),
-                  Container(
-                    padding: const EdgeInsets.all(Spacing.medium),
-                    decoration: BoxDecoration(
-                      color: colorScheme.secondary,
-                    ),
-                    child: const Row(
-                      children: [
-                        Text('Дата завершення:'),
-                      ],
+                  InkWell(
+                    onTap: () => pickDate(
+                        context,
+                        DateTime.now(),
+                        (selectedDate) =>
+                            {addTodoController.onDateSelect(selectedDate)}),
+                    child: Container(
+                      padding: const EdgeInsets.all(Spacing.medium),
+                      decoration: BoxDecoration(
+                        color: colorScheme.secondary,
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Дата завершення: ${addTodoState.finishDate.value}',
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: Spacing.small),
