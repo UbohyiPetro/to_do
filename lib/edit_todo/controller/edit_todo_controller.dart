@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -6,10 +5,12 @@ import 'package:softwars_to_do/database/repository/todo_repository.dart';
 import 'package:softwars_to_do/edit_todo/mapper/edit_todo_mapper.dart';
 import 'package:softwars_to_do/edit_todo/state/edit_todo_state.dart';
 import 'package:softwars_to_do/main/mapper/todo_mapper.dart';
-import 'package:softwars_to_do/main/model/todo_item.dart';
+import 'package:softwars_to_do/main/model/task_item.dart';
+import 'package:softwars_to_do/main/repository/tasks_repository.dart';
 
 class EditTodoController extends GetxController {
   final TodoRepository _todoRepository = Get.find();
+  final TaskRepository _taskRepository = Get.find();
   final EditTodoState editTodoState = EditTodoState();
   final String taskId = Get.arguments;
 
@@ -17,7 +18,7 @@ class EditTodoController extends GetxController {
   void onInit() async {
     super.onInit();
     await _todoRepository.findTodoById(taskId).then((todoEntity) {
-      TodoItem todoItem = todoEntity!.toTodoItem();
+      TaskItem todoItem = todoEntity!.toTodoItem();
       editTodoState.nameController.value.text = todoItem.name;
       editTodoState.descriptionController.value.text = todoItem.description;
       if (todoItem.type == 1) {
@@ -28,17 +29,21 @@ class EditTodoController extends GetxController {
       editTodoState.urgent.value = todoItem.urgent;
       editTodoState.finishDate.value =
           DateFormat('dd.MM.yyyy').format(todoItem.finishDate);
-      editTodoState.file.value = todoItem.file.isNotEmpty
-          ? const Base64Decoder().convert(todoItem.file)
-          : null;
+      // editTodoState.file.value = todoItem.file.isNotEmpty
+      //     ? const Base64Decoder().convert(todoItem.file)
+      //     : null;
       editTodoState.status.value = todoItem.status;
       editTodoState.isLoading.value = false;
     });
   }
 
-  Future<void> editTodo() async {
-    await _todoRepository
-        .updateTodo(editTodoState.toTodoItem(taskId).toTaskEntity());
+  // Future<void> editTodo() async {
+  //   await _todoRepository
+  //       .updateTodo(editTodoState.toTodoItem(taskId).toTaskEntity());
+  // }
+
+  void editTask() {
+    _taskRepository.editTask(editTodoState.toTodoItem(taskId));
   }
 
   Future<void> deleteTodo() async {

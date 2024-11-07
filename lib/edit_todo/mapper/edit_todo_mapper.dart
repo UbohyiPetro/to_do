@@ -1,10 +1,10 @@
 import 'package:intl/intl.dart';
 import 'package:softwars_to_do/edit_todo/state/edit_todo_state.dart';
-import 'package:softwars_to_do/main/model/todo_item.dart';
+import 'package:softwars_to_do/main/model/task_item.dart';
 
 extension ToTodoItem on EditTodoState {
-  TodoItem toTodoItem(String taskId) {
-    return TodoItem(
+  TaskItem toTodoItem(String taskId) {
+    return TaskItem(
       taskId: taskId,
       status: status.value,
       name: nameController.value.text,

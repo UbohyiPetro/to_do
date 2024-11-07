@@ -15,6 +15,7 @@ class TodoApi {
         throw Exception(
             "Failed to fetch tasks with code ${response.statusCode}");
       }
+      print(response.data);
       ResponseModel responseModel = ResponseModel.fromJson(response.data);
       if (responseModel.error != null) {
         throw Exception(
@@ -26,13 +27,25 @@ class TodoApi {
     }
   }
 
-  void addTask(TaskApi task) async {
+  void upsertTask(TaskApi task) async {
     try {
       final response = await _dio.post(baseUrl,
           options: Options(
             contentType: 'application/json',
           ),
           data: [task]);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void updateStatus(String id, int status) async {
+    try {
+      final response = await _dio.put('$baseUrl$id',
+          options: Options(
+            contentType: 'application/json',
+          ),
+          data: {"status": status});
     } catch (e) {
       rethrow;
     }

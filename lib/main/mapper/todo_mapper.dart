@@ -1,9 +1,9 @@
 import 'package:softwars_to_do/database/entity/task_entity.dart';
-import 'package:softwars_to_do/main/model/todo_item.dart';
+import 'package:softwars_to_do/main/model/task_item.dart';
 
 extension ToTodoItem on TaskEntity {
-  TodoItem toTodoItem() {
-    return TodoItem(
+  TaskItem toTodoItem() {
+    return TaskItem(
       taskId: taskId,
       status: status,
       name: name,
@@ -16,7 +16,7 @@ extension ToTodoItem on TaskEntity {
   }
 }
 
-extension ToTaskEntity on TodoItem {
+extension ToTaskEntity on TaskItem {
   TaskEntity toTaskEntity() {
     return TaskEntity(
       taskId: taskId,

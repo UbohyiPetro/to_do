@@ -1,12 +1,10 @@
 import 'package:get/get.dart';
 import 'package:softwars_to_do/database/repository/todo_repository.dart';
-import 'package:softwars_to_do/main/mapper/todo_mapper.dart';
-import 'package:softwars_to_do/main/model/todo_item.dart';
+import 'package:softwars_to_do/main/model/task_item.dart';
 import 'package:softwars_to_do/main/repository/tasks_repository.dart';
 import 'package:softwars_to_do/main/state/main_state.dart';
 
 class MainController extends GetxController {
-  final TodoRepository _todoRepository = Get.find();
   final TaskRepository _taskRepository = Get.find();
   final MainState mainState = MainState();
 
@@ -23,10 +21,9 @@ class MainController extends GetxController {
     });
   }
 
-  void updateTodoStatus(TodoItem todoItem) {
-    var status = todoItem.status == 1 ? 2 : 1;
-    _todoRepository
-        .updateTodo(todoItem.copyWith(status: status).toTaskEntity());
+  void updateStatus(TaskItem task) {
+    var status = task.status == 1 ? 2 : 1;
+    _taskRepository.updateStatus(task.copyWith(status: status));
   }
 
   bool isFilterSelected(int filterValue) =>

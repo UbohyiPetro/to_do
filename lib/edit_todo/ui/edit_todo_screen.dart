@@ -62,7 +62,7 @@ class EditTodoScreen extends StatelessWidget {
                           ),
                           IconButton(
                             onPressed: () {
-                              editTodoController.editTodo();
+                              editTodoController.editTask();
                               Get.back();
                             },
                             icon: Icon(

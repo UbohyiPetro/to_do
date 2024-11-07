@@ -5,11 +5,11 @@ import 'package:intl/intl.dart';
 import '../../navigation/navigation.dart';
 import '../../theme/spacing.dart';
 import '../components/todo_checkbox.dart';
-import '../model/todo_item.dart';
+import '../model/task_item.dart';
 
 class TodoItemCard extends StatelessWidget {
-  final Function(TodoItem) onClick;
-  final TodoItem todoItem;
+  final Function(TaskItem) onClick;
+  final TaskItem todoItem;
 
   const TodoItemCard({
     super.key,
