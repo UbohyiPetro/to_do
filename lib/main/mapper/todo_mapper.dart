@@ -11,7 +11,7 @@ extension ToTodoItem on TodoEntity {
       type: type,
       description: description,
       file: file,
-      finishDate: DateFormat('dd.MM.yyyy').parse(finishDate),
+      finishDate: DateFormat('yyyy-MM-dd').parse(finishDate),
       urgent: urgent,
     );
   }
