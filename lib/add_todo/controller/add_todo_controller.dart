@@ -19,11 +19,10 @@ class AddTodoController extends GetxController {
     addTodoState.finishDate.value = DateFormat('dd.MM.yyyy').format(newDate);
   }
 
-  Future<File?> selectImage() async {
+  Future<void> selectImage() async {
     XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (file != null) {
-      return File(file.path);
+      addTodoState.file.value = File(file.path);
     }
-    return null;
   }
 }
