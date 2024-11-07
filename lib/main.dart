@@ -5,6 +5,7 @@ import 'package:softwars_to_do/navigation/navigation.dart';
 import 'package:softwars_to_do/theme/app_theme.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await putDependencies();
   runApp(const SoftWarsTodoApp());
 }

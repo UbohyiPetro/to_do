@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:softwars_to_do/add_todo/controller/add_todo_controller.dart';
 import 'package:softwars_to_do/main/components/todo_checkbox.dart';
-import 'package:softwars_to_do/main/controller/main_controller.dart';
-import 'package:softwars_to_do/main/model/todo_item.dart';
 
 import '../../theme/spacing.dart';
 
@@ -12,7 +10,6 @@ class AddToDoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainController = Get.find<MainController>();
     final addTodoController = Get.put(AddTodoController());
     final addTodoState = addTodoController.addTodoState;
     final colorScheme = Theme.of(context).colorScheme;
@@ -196,20 +193,8 @@ class AddToDoScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(Spacing.medium),
                         ),
                       ),
-                      onPressed: () async {
-                        TodoItem todoItem = TodoItem(
-                          taskId:
-                              DateTime.now().millisecondsSinceEpoch.toString(),
-                          status: 1,
-                          name: addTodoState.nameController.text.trim(),
-                          type: addTodoState.isTypePrivate.value == 1 ? 2 : 1,
-                          description:
-                              addTodoState.descriptionController.text.trim(),
-                          finishDate: DateTime.now(),
-                          urgent: addTodoState.urgent.value,
-                          file: '',
-                        );
-                        mainController.addTodo(todoItem);
+                      onPressed: () {
+                        addTodoController.addTodo();
                         Get.back();
                       },
                       child: const Text(
